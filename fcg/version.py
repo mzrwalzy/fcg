@@ -2,5 +2,5 @@
 # @Time     : 2021/8/18 13:43
 # @Author   : Charon.
 
-__version_info__ = ('0', '2', '5')
+__version_info__ = ('1', '0', '0')
 __version__ = '.'.join(__version_info__)

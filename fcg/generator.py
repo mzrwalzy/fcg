@@ -101,16 +101,21 @@ def main():
         dir = sys.argv[2]
         if 'core' in dir:
             dir_ = dir
+        else:
+            raise Exception('need a correct absolute path')
     except:
         if 'core' in os.getcwd():
             dir_ = os.getcwd()
         elif 'core' in os.listdir():
             os.chdir('core')
             dir_ = os.getcwd()
+        else:
+            raise Exception('need a correct absolute path')
 
     resource = resource_name.title()
 
     template_dict = {'actions': actions,
+                     'models': models,
                      'repositories': repositories,
                      'resources': resources,
                      'transformers': transformers,

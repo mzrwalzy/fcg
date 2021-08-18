@@ -20,9 +20,8 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'fcg = fcg.__main__:main'
+            'fcg = fcg.generator:main'
         ]
     },
     zip_safe=False,
-    platforms='any',
 )

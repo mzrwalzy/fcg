@@ -2,11 +2,10 @@
 # @Time     : 2021/8/18 11:48
 # @Author   : Charon.
 import re
-import shutil
 import sys
 import os
-
-import template as template
+from docopt import docopt
+from fcg.version import __version__
 
 actions = """
 from core.actions._base import SingleAction
@@ -91,10 +90,12 @@ class ${resource}Validator(BaseValidator):
     pass
 """
 
-if __name__ == '__main__':
+
+def main():
+    arg = docopt(__doc__, version=__version__)
     try:
-        resource_name = sys.argv[1]
-        dir = sys.argv[2]
+        resource_name = sys.argv[0]
+        dir = sys.argv[1]
     except:
         resource_name = 'default'
         dir = os.getcwd()
@@ -113,3 +114,6 @@ if __name__ == '__main__':
         with open(dir+fr'\{template_name}\{resource_name}.py', 'w') as w:
             w.write(template_)
 
+
+if __name__ == '__main__':
+    main()

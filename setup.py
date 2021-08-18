@@ -10,9 +10,9 @@ setup(
     long_description='README.md',
     url='https://github.com/mzrwalzy/fcg.git',
     packages=find_packages(),
-    install_requires=[
-            'docopt==0.6.2',
-        ],
+    # install_requires=[
+    #         'docopt==0.6.2',
+    #     ],
     classifiers=[
         'Programming Language :: Python :: 3.6',
         'License :: OSI Approved :: MIT License',

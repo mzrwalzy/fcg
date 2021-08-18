@@ -4,8 +4,6 @@
 import re
 import sys
 import os
-from docopt import docopt
-from fcg.version import __version__
 
 actions = """
 from core.actions._base import SingleAction

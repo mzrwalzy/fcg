@@ -92,28 +92,36 @@ class ${resource}Validator(BaseValidator):
 
 
 def main():
-    # arg = docopt(__doc__, version=__version__)
-    print(list(sys.argv))
-    # try:
-    #     resource_name = sys.argv[0]
-    #     dir = sys.argv[1]
-    # except:
-    #     resource_name = 'default'
-    #     dir = os.getcwd()
-    # resource = resource_name.title()
-    #
-    # template_dict = {'actions': actions,
-    #                  'repositories': repositories,
-    #                  'resources': resources,
-    #                  'transformers': transformers,
-    #                  'validators': validators
-    #                  }
-    #
-    # for template_name, template in template_dict.items():
-    #     template = re.sub(r'\$\{resource\}', resource, str(template))
-    #     template_ = re.sub(r'\$\{resource_name\}', resource_name, str(template))
-    #     with open(dir+fr'\{template_name}\{resource_name}.py', 'w') as w:
-    #         w.write(template_)
+    try:
+        resource_name = sys.argv[1]
+    except:
+        raise Exception('need a resource name')
+
+    try:
+        dir = sys.argv[2]
+        if 'core' in dir:
+            dir_ = dir
+    except:
+        if 'core' in os.getcwd():
+            dir_ = os.getcwd()
+        elif 'core' in os.listdir():
+            os.chdir('core')
+            dir_ = os.getcwd()
+
+    resource = resource_name.title()
+
+    template_dict = {'actions': actions,
+                     'repositories': repositories,
+                     'resources': resources,
+                     'transformers': transformers,
+                     'validators': validators
+                     }
+
+    for template_name, template in template_dict.items():
+        template = re.sub(r'\$\{resource\}', resource, str(template))
+        template_ = re.sub(r'\$\{resource_name\}', resource_name, str(template))
+        with open(dir_+fr'\{template_name}\{resource_name}.py', 'w') as w:
+            w.write(template_)
 
 
 if __name__ == '__main__':

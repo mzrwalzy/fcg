@@ -92,8 +92,8 @@ class ${resource}Validator(BaseValidator):
 
 
 def main():
-    arg = docopt(__doc__, version=__version__)
-    print(arg)
+    # arg = docopt(__doc__, version=__version__)
+    print(list(sys.argv))
     # try:
     #     resource_name = sys.argv[0]
     #     dir = sys.argv[1]

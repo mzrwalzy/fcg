@@ -7,14 +7,14 @@ setup(
     author='charon.',
     author_email='mzrwalzy@163.com',
     description='fastapi code generator',
-    long_description='README.md',
+    long_description=open('README.md').read(),
     url='https://github.com/mzrwalzy/fcg.git',
     packages=find_packages(),
-    # install_requires=[
-    #         'docopt==0.6.2',
-    #     ],
+    install_requires=[
+            'click==8.0.1',
+        ],
     classifiers=[
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
@@ -23,5 +23,5 @@ setup(
             'fcg = fcg.generator:main'
         ]
     },
-    zip_safe=False,
+    zip_safe=True,
 )

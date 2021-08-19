@@ -2,8 +2,8 @@
 # @Time     : 2021/8/18 11:48
 # @Author   : Charon.
 import re
-import sys
 import os
+import click
 
 actions = """
 from core.actions._base import SingleAction
@@ -89,19 +89,21 @@ class ${resource}Validator(BaseValidator):
 """
 
 
-def main():
-    try:
-        resource_name = sys.argv[1]
-    except:
+@click.command()
+@click.option('--resource', '-rn', help='resource name')
+@click.option('--dir', '-d', help='path to directory')
+def main(resource, dir):
+    if resource:
+        resource_name = resource
+    else:
         raise Exception('need a resource name')
 
-    try:
-        dir = sys.argv[2]
+    if dir:
         if 'core' in dir:
             dir_ = dir
         else:
             raise Exception('need a correct absolute path')
-    except:
+    else:
         if 'core' in os.getcwd():
             dir_ = os.getcwd()
         elif 'core' in os.listdir():

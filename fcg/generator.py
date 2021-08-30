@@ -127,7 +127,7 @@ def main(resource, dir):
         template_ = re.sub(r'\$\{resource_name\}', resource_name, str(template))
         with open(dir_+fr'\{template_name}\{resource_name}.py', 'w') as w:
             w.write(template_)
-        print(f"generate {template_name}\{resource_name}.py")
+        print(f"generate {template_name}/{resource_name}.py")
 
 
 if __name__ == '__main__':

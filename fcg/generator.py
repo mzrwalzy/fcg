@@ -7,8 +7,6 @@ import click
 
 actions = """
 from core.actions._base import SingleAction
-from core.models._all import ${resource} as Model
-from core.repositories.${resource_name} import ${resource}Repository
 
 
 class ${resource}Action(SingleAction):
@@ -19,7 +17,6 @@ class ${resource}Action(SingleAction):
 """
 
 models = """
-from . import *  # noqa
 from sqlalchemy import CHAR, Column, DECIMAL, DateTime, Enum, Index, LargeBinary, String, TIMESTAMP, Text, text
 from sqlalchemy.dialects.mysql import BIGINT, INTEGER, MEDIUMINT, SET, TINYINT, VARCHAR, YEAR
 from sqlalchemy.sql.sqltypes import NullType
@@ -112,7 +109,9 @@ def main(resource, dir):
         else:
             raise Exception('need a correct absolute path')
 
-    resource = resource_name.title()
+    resource_ = resource_name.title()
+    if '_' in resource_:
+        resource_ = ''.join([k.title() for k in resource_name.split('_')])
 
     template_dict = {'actions': actions,
                      'models': models,
@@ -123,9 +122,9 @@ def main(resource, dir):
                      }
 
     for template_name, template in template_dict.items():
-        template = re.sub(r'\$\{resource\}', resource, str(template))
+        template = re.sub(r'\$\{resource\}', resource_, str(template))
         template_ = re.sub(r'\$\{resource_name\}', resource_name, str(template))
-        with open(dir_+fr'\{template_name}\{resource_name}.py', 'w') as w:
+        with open(dir_ + fr'\{template_name}\{resource_name}.py', 'w') as w:
             w.write(template_)
         print(f"generate {template_name}/{resource_name}.py")
 
